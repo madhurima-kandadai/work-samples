@@ -1,17 +1,14 @@
+# -*- coding: utf-8 -*-
+
 import os
 from flask import Flask, jsonify
 import sqlalchemy
-import yaml
-
-# configurations
-with open(os.path.join(os.path.dirname(__file__), 'config.yml')) as f:
-    config = yaml.load(f)
 
 # web app
 app = Flask(__name__)
 
 # database engine
-engine = sqlalchemy.create_engine(config['sql'])
+engine = sqlalchemy.create_engine(os.getenv('SQL_URI'))
 
 
 @app.route('/')

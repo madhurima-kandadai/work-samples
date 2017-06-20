@@ -2,5 +2,5 @@ pip-tools
 flask
 sqlalchemy
 psycopg2
-pyyaml
 simplejson
+gunicorn

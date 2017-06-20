@@ -1,2 +1,0 @@
-# SQL connection string
-sql: postgresql://localhost:5432/work_samples

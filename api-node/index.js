@@ -1,9 +1,10 @@
-const config = require('./config')
 const express = require('express')
 const pg = require('pg')
 
 const app = express()
-const pool = new pg.Pool(config.SQL_CONFIG)
+// configs come from standard PostgreSQL env vars
+// https://www.postgresql.org/docs/9.6/static/libpq-envars.html
+const pool = new pg.Pool()
 
 const queryHandler = (req, res, next) => {
   pool.query(req.sqlQuery).then((r) => {
@@ -65,12 +66,12 @@ app.get('/stats/daily', (req, res, next) => {
   return next()
 }, queryHandler)
 
-app.listen(config.PORT || 5555, (err) => {
+app.listen(process.env.PORT || 5555, (err) => {
   if (err) {
     console.error(err)
     process.exit(1)
   } else {
-    console.log(`Running on ${config.PORT || 5555}`)
+    console.log(`Running on ${process.env.PORT || 5555}`)
   }
 })
 

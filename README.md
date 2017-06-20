@@ -18,7 +18,7 @@ You will receive problems that cover both server-side and client-side design asp
 
 For the *server-side* aspect, you will solve problems using one of [`api-python`](api-python) or [`api-node`](api-node) work samples.
 
-For the *client-side design* aspect, you may consume a hosted version of the same API provided as the `api-*` work samples, but you can benefit more from running your own copy, as you can adjust the server-side implementation as you wish. For client-side implementations, feel free to pick anything that you are comfortable with. However, if you don't have a preference, we recommend using [Vue.js](https://vuejs.org/).
+For the *client-side design* aspect, you may consume a [hosted version](https://eq-work-samples-api.herokuapp.com) of the same API provided as the `api-python` work sample, but you can benefit more from running your own copy, as you can adjust the server-side implementation as you wish. Since you should already know about Javascript, the `api-node` work sample is highly recommended. For client-side implementations, feel free to pick anything that you are comfortable with. However, if you don't have a preference, we recommend using [Vue.js](https://vuejs.org/).
 
 ### Data
 
