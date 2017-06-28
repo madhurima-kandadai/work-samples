@@ -15,6 +15,10 @@ var pageCountLock = sync.Mutex{}
 var db *sql.DB
 var dbLock = sync.Mutex{}
 
+func welcomeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Welcome to EQ Works 😎")
+}
+
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	incCounter("view")
 	processRequest(r.RequestURI)
@@ -104,6 +108,7 @@ func main() {
 		}
 	}()
 
+	http.HandleFunc("/", welcomeHandler)
 	http.HandleFunc("/view/", viewHandler)
 	http.HandleFunc("/counter/", counterHandler)
 	http.HandleFunc("/counter-db/", counterDBHandler)
