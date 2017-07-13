@@ -1,6 +1,6 @@
 ## Hosted version
 
-If you intend to focus on the client-side design aspect of the problem set, you can start by leveraging the hosted version at <https://eq-work-samples-api.herokuapp.com>
+If you intend to focus on the client-side aspect of the problem set, you can start by leveraging the hosted version at <https://eq-work-samples-api.herokuapp.com>
 
 ## Environment
 
