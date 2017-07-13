@@ -4,7 +4,7 @@ At EQ Works, we take a more effective path to technical interview -- you get to 
 
 If you are interested to work with us, but haven't already applied, go to https://eqworks.workable.com/ and apply for *only one* primary role that you're interested in.
 
-You will then receive an email containing problems which you may solve using one of the work samples in this repository. We don't have a fixed deadline, and everything is optional, but consider this a "first-come-first-serve" opportunity, so it's recommended to submit your solutions within a week from the day you receive the email.
+You will then receive an email containing problems which you may solve using one of the work samples in this repository.
 
 ## Roles
 
