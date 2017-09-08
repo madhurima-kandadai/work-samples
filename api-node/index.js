@@ -2,9 +2,26 @@ const express = require('express')
 const pg = require('pg')
 
 const app = express()
+
+var PGHOST = 'work-samples-db.cx4wctygygyq.us-east-1.rds.amazonaws.com'
+var PGPORT = '5432'
+var PGDATABASE = 'work_samples'
+var PGUSER = 'readonly'
+var PGPASSWORD = 'w2UIO@#bg532!'
+var SQL_URI = 'postgresql://readonly:w2UIO@#bg532!@work-samples-db.cx4wctygygyq.us-east-1.rds.amazonaws.com:5432/work_samples'
+
+var conString = "pg://" + PGUSER + ":" + PGPASSWORD + "@" + PGHOST + ":" + PGPORT + "/" + PGDATABASE;
+
+
 // configs come from standard PostgreSQL env vars
 // https://www.postgresql.org/docs/9.6/static/libpq-envars.html
-const pool = new pg.Pool()
+const pool = new pg.Pool({
+  user: PGUSER,
+  host: PGHOST,
+  database: PGDATABASE,
+  password: PGPASSWORD,
+  port: PGPORT,
+})
 
 const queryHandler = (req, res, next) => {
   pool.query(req.sqlQuery).then((r) => {
