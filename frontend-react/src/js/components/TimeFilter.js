@@ -10,7 +10,7 @@ export default class TimeFilter extends React.Component {
 
   onChange(ev) {
     this.props.onChange(ev.target.value);
-    this.setState({value: ev.target.value});
+    this.setState({ value: ev.target.value });
   }
 
   render() {

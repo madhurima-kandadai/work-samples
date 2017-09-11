@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import EventsRow from './EventsRow';
+import StatsRow from './StatsRow';
 
-export default class EventsTable extends React.Component {
+export default class StatsTable extends React.Component {
   render() {
     return (
       <table className="table table-striped">
         <thead>
-            <tr>                
+            <tr>
                 <th>Date</th>
                 <th>Hour</th>
-                <th>Events</th>
+                <th>Impressions</th>
+                <th>Click</th>
+                <th>Revenue</th>                
             </tr>
         </thead>
         <tbody>
-            <EventsRow/>
-            <EventsRow/>
-            <EventsRow/>
+            <StatsRow/>
+            <StatsRow/>
+            <StatsRow/>
         </tbody>
       </table>
 
