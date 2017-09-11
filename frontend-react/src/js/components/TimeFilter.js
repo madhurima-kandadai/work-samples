@@ -5,7 +5,7 @@ import Select from 'muicss/lib/react/select';
 
 export default class TimeFilter extends React.Component {
   state = {
-    value: "hourly"
+    value: "daily"
   };
 
   onChange(ev) {

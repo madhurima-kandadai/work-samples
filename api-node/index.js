@@ -26,65 +26,101 @@ const pool = new pg.Pool({
   port: PGPORT,
 })
 
-const queryHandler = (req, res, next) => {
-  pool.query(req.sqlQuery).then((r) => {
-    return res.json(r.rows || [])
-  }).catch(next)
-}
-
 app.get('/', (req, res) => {
   res.send('Welcome to EQ Works 😎')
 })
 
 app.get('/events/hourly', (req, res, next) => {
-  req.sqlQuery = `
-    SELECT date, hour, SUM(events) AS events
-    FROM public.hourly_events
-    GROUP BY date, hour
-    ORDER BY date, hour
-    LIMIT 168;
-  `
-  return next()
-}, queryHandler)
+  var withRowCount = req.query.withRowCount;
+  var rowCountQuery = `SELECT count(*) FROM public.hourly_events GROUP BY date, hour;  `
+  var sqlQuery = `SELECT date, hour, SUM(events) AS events FROM public.hourly_events GROUP BY date, hour ORDER BY date DESC, hour LIMIT 5 OFFSET 5;`
+  var result = { rowCount: {}, data: {}, withRowCount: withRowCount };
+  pool.query(sqlQuery, function (err, rows, fields) {
+    result.data = rows.rows;
+    if (err) throw err;
+    if (withRowCount == "true") {
+      pool.query(rowCountQuery, function (err, rows, fields) {
+        result.rowCount = rows.rowCount;
+        if (err) throw err;
+        res.send(result);
+      });
+    }
+    else {
+      res.send(result);
+    }
+  });
+});
 
 app.get('/events/daily', (req, res, next) => {
-  req.sqlQuery = `
-    SELECT date, SUM(events) AS events
-    FROM public.hourly_events
-    GROUP BY date
-    ORDER BY date
-    LIMIT 7;
-  `
-  return next()
-}, queryHandler)
+  var withRowCount = req.query.withRowCount;
+  var rowCountQuery = ` SELECT count(*) AS events FROM public.hourly_events GROUP BY date `;
+  var sqlQuery = `SELECT date, SUM(events) AS events FROM public.hourly_events GROUP BY date ORDER BY date DESC LIMIT 5 OFFSET 5;`
+  var result = { rowCount: {}, data: {}, withRowCount: withRowCount };
+  pool.query(sqlQuery, function (err, rows, fields) {
+    result.data = rows.rows;
+    if (err) throw err;
+    if (withRowCount == "true") {
+      pool.query(rowCountQuery, function (err, rows, fields) {
+        result.rowCount = rows.rowCount;
+        if (err) throw err;
+        res.send(result);
+      });
+    }
+    else {
+      res.send(result);
+    }
+  });
+});
 
 app.get('/stats/hourly', (req, res, next) => {
-  req.sqlQuery = `
-    SELECT date, hour,
-        SUM(impressions) AS impressions,
-        SUM(clicks) AS clicks,
-        SUM(revenue) AS revenue
-    FROM public.hourly_stats
-    GROUP BY date, hour
-    ORDER BY date, hour
-    LIMIT 168;
-  `
-  return next()
-}, queryHandler)
+  var withRowCount = req.query.withRowCount;
+  var rowCountQuery = `SELECT count(*) FROM public.hourly_stats GROUP BY date, hour`;
+  var sqlQuery = `SELECT date, hour,SUM(impressions) AS impressions,SUM(clicks) AS clicks,SUM(revenue) AS revenue
+                  FROM public.hourly_stats
+                  GROUP BY date, hour
+                  ORDER BY date DESC, hour
+                  LIMIT 5 OFFSET 5;`
+  var result = { rowCount: {}, data: {}, withRowCount: withRowCount };
+  pool.query(sqlQuery, function (err, rows, fields) {
+    result.data = rows.rows;
+    if (err) throw err;
+    if (withRowCount == "true") {
+      pool.query(rowCountQuery, function (err, rows, fields) {
+        result.rowCount = rows.rowCount;
+        if (err) throw err;
+        res.send(result);
+      });
+    }
+    else {
+      res.send(result);
+    }
+  });
+});
 
 app.get('/stats/daily', (req, res, next) => {
-  req.sqlQuery = `
-    SELECT date,
-        SUM(impressions) AS impressions,
-        SUM(clicks) AS clicks,
-        SUM(revenue) AS revenue
-    FROM public.hourly_stats
-    GROUP BY date
-    ORDER BY date
-    LIMIT 7;
-  `
-  return next()
-}, queryHandler)
+  var withRowCount = req.query.withRowCount;
+  var rowCountQuery = `SELECT count(*) AS events FROM public.hourly_events GROUP BY date`
+  var sqlQuery = ` SELECT date, SUM(impressions) AS impressions, SUM(clicks) AS clicks, SUM(revenue) AS revenue
+                    FROM public.hourly_stats
+                    GROUP BY date
+                    ORDER BY date DESC
+                    LIMIT 5 OFFSET 5;  `
+  var result = { rowCount: {}, data: {}, withRowCount: withRowCount };
+  pool.query(sqlQuery, function (err, rows, fields) {
+    result.data = rows.rows;
+    if (err) throw err;
+    if (withRowCount == "true") {
+      pool.query(rowCountQuery, function (err, rows, fields) {
+        result.rowCount = rows.rowCount;
+        if (err) throw err;
+        res.send(result);
+      });
+    }
+    else {
+      res.send(result);
+    }
+  });
+});
 
 app.listen(process.env.PORT || 5555, (err) => {
   if (err) {

@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import config from '../config';
 
 
-export default class StatsApi extends React.Component {
+export default class StatsApi {
 
-   static getDailyStats() {
-        return fetch(config.apiUrl + '/stats/daily', { method: 'GET' }, { 'mode': 'no-cors' })
+    static getDailyStats(withRowCount) {
+        return fetch(config.apiUrl + '/stats/daily/', { withRowCount: withRowCount, paramX: 'abc' }, { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
@@ -14,8 +14,8 @@ export default class StatsApi extends React.Component {
             });
     }
 
-    static getHourlyStats() {
-        return fetch(config.apiUrl + '/stats/hourly', { method: 'GET' }, { 'mode': 'no-cors' })
+    static getHourlyStats(withRowCount) {
+        return fetch(config.apiUrl + '/stats/hourly?withRowCount' + withRowCount, { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {

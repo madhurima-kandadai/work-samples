@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import config from '../config';
 
 
-export default class EventsApi extends React.Component {
+export default class EventsApi  {
 
-    static getDailyEvents() {        
-        return fetch(config.apiUrl + '/events/daily', { method: 'GET' }, { 'mode': 'no-cors' })
+    static getDailyEvents(withRowCount) {        
+        return fetch(config.apiUrl + '/events/daily?withRowCount=' + withRowCount, { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
@@ -14,8 +14,8 @@ export default class EventsApi extends React.Component {
             });
     }
 
-    static getHourlyEvents() {
-        return fetch(config.apiUrl + '/events/hourly', { method: 'GET' }, { 'mode': 'no-cors' })
+    static getHourlyEvents(withRowCount) {
+        return fetch(config.apiUrl + '/events/hourly?withRowCount=' + withRowCount, { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
