@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import config from '../config';
 
 
-export default class EventsApi  {
+export default class EventsApi {
 
-    static getDailyEvents(withRowCount) {        
-        return fetch(config.apiUrl + '/events/daily?withRowCount=' + withRowCount, { method: 'GET' }, { 'mode': 'no-cors' })
+    static getDailyEvents(withRowCount, pageNumber, limit) {
+        var data = {
+            withRowCount: withRowCount,
+            pageNumber: pageNumber,
+            limit: limit
+        };
+        return fetch(config.apiUrl + '/events/daily?withRowCount=' + withRowCount + '&pageNumber=' + pageNumber + '&limit=' + limit, { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
@@ -14,8 +19,13 @@ export default class EventsApi  {
             });
     }
 
-    static getHourlyEvents(withRowCount) {
-        return fetch(config.apiUrl + '/events/hourly?withRowCount=' + withRowCount, { method: 'GET' }, { 'mode': 'no-cors' })
+    static getHourlyEvents(withRowCount, pageNumber, limit) {
+        var data = {
+            withRowCount: withRowCount,
+            pageNumber: pageNumber,
+            limit: limit
+        };
+        return fetch(config.apiUrl + '/events/hourly?withRowCount=' + withRowCount + '&pageNumber=' + pageNumber + '&limit=' + limit, { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
