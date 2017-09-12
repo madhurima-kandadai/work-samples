@@ -71,9 +71,12 @@ export default class EventsTable extends React.Component {
     var data = this.state.eventsData;
     return (
       <div>
-        <TimeFilter onChange={this.onTimeChangeEvents.bind(this)} />
+        <div className="time-filter">
+          Filter Time: 
+          <TimeFilter onChange={this.onTimeChangeEvents.bind(this)} />
+        </div>
         <div>
-          <table className="table table-striped">
+          <table className="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>Date</th>
@@ -90,13 +93,15 @@ export default class EventsTable extends React.Component {
             </tbody>
           </table>
         </div>
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={this.state.totalRows}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange.bind(this)}
-        />
+        <div className="pagination-elements">
+          <Pagination
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={this.state.totalRows}
+            pageRangeDisplayed={5}
+            onChange={this.handlePageChange.bind(this)}
+          />
+        </div>
       </div>
     );
   }

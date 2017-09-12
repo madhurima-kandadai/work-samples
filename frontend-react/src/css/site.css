@@ -1,0 +1,21 @@
+table {
+    background: #f8f5f5;
+}
+
+.pagination-elements {
+    text-align: center;
+}
+
+.time-filter {
+    float: right;
+}
+
+.time-filter-select {
+    display: inline-block;
+    width: 100px;
+    padding-left: 10px;
+}
+
+.mui-tabs__bar>li.mui--is-active {
+    background: aliceblue;
+}

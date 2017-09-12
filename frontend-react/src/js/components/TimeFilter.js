@@ -15,12 +15,10 @@ export default class TimeFilter extends React.Component {
 
   render() {
     return (
-      <form>
-        <Select name="input" value={this.state.value} onChange={this.onChange.bind(this)} >
+        <Select name="input" value={this.state.value} onChange={this.onChange.bind(this)} class="time-filter-select" >
           <Option value="hourly" label="Hourly" />
           <Option value="daily" label="Daily" />
         </Select>
-      </form>
     );
   }
 }
