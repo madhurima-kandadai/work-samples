@@ -69,9 +69,11 @@ export default class StatsTable extends React.Component {
     var data = this.state.statsData;
     return (
       <div>
-        <TimeFilter onChange={this.onTimeChangeStats.bind(this)} />
+        <div className="time-filter">
+          <TimeFilter onChange={this.onTimeChangeStats.bind(this)} />
+        </div>
         <div>
-          <table className="table table-striped">
+          <table className="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>Date</th>
@@ -90,13 +92,15 @@ export default class StatsTable extends React.Component {
             </tbody>
           </table>
         </div>
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={this.state.totalRows}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange.bind(this)}
-        />
+        <div className="pagination-elements">
+          <Pagination
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={this.state.totalRows}
+            pageRangeDisplayed={5}
+            onChange={this.handlePageChange.bind(this)}
+          />
+        </div>
       </div>
     );
   }
