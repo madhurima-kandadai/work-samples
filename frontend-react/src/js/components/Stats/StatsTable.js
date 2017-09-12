@@ -20,8 +20,13 @@ export default class StatsTable extends React.Component {
   }
 
   onTimeChangeStats(value) {
-    this.setState({ selectedTime: value }, () => console.log(this.state.selectedTime));
-    this.CallStats(true);
+    this.setState(
+      {
+        selectedTime: value,
+        activePage: 1
+      }, () => {
+        this.CallStats(true);
+      });
   }
 
   CallStats(withRowCount) {
@@ -55,8 +60,9 @@ export default class StatsTable extends React.Component {
 
   handlePageChange(pageNumber) {
     console.log(`active page is ${pageNumber}`);
-    this.setState({ activePage: pageNumber });
-    this.CallStats(false);
+    this.setState({ activePage: pageNumber }, () => {
+      this.CallStats(false);
+    });
   }
 
   render() {

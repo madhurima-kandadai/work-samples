@@ -19,11 +19,16 @@ export default class EventsTable extends React.Component {
   }
 
   onTimeChangeEvents(value) {
-    this.setState({ selectedTime: value }, () => console.log(this.state.selectedTime));
-    this.CallEvents(true);
+    this.setState(
+      {
+        selectedTime: value,
+        activePage: 1
+      }, () => {
+        this.CallEvents(true);
+      });
   }
 
-  CallEvents(withRowCount) {    
+  CallEvents(withRowCount) {
     if (this.state.selectedTime == 'hourly') {
       this.getHourlyEvents(withRowCount);
     }
@@ -52,10 +57,14 @@ export default class EventsTable extends React.Component {
       });
   }
 
-  handlePageChange(pageNumber) {    
+  handlePageChange(pageNumber) {
     console.log(`active page is ${pageNumber}`);
-    this.setState({ activePage: pageNumber }, () => console.log(this.state.activePage));
-    this.CallEvents(false);
+    this.setState({
+      activePage: pageNumber
+    }, () => {
+      console.log(this.state.activePage);
+      this.CallEvents(false);
+    });
   }
 
   render() {
