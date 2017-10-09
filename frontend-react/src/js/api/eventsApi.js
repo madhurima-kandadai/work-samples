@@ -11,7 +11,7 @@ export default class EventsApi {
             pageNumber: pageNumber,
             limit: limit
         };
-        return fetch(config.apiUrl + '/events/daily?withRowCount=' + withRowCount + '&pageNumber=' + pageNumber + '&limit=' + limit, { method: 'GET' }, { 'mode': 'no-cors' })
+        return fetch(config.apiUrl + '/events?withRowCount=' + withRowCount + '&pageNumber=' + pageNumber + '&limit=' + limit + "&timeConstraint=daily", { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
@@ -25,7 +25,7 @@ export default class EventsApi {
             pageNumber: pageNumber,
             limit: limit
         };
-        return fetch(config.apiUrl + '/events/hourly?withRowCount=' + withRowCount + '&pageNumber=' + pageNumber + '&limit=' + limit, { method: 'GET' }, { 'mode': 'no-cors' })
+        return fetch(config.apiUrl + '/events?withRowCount=' + withRowCount + '&pageNumber=' + pageNumber + '&limit=' + limit + "&timeConstraint=hourly", { method: 'GET' }, { 'mode': 'no-cors' })
             .then(response => {
                 return response.json();
             }).catch(error => {
