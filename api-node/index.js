@@ -16,6 +16,16 @@ app.use(function (req, res, next) {
   next();
 });
 
+var RateLimit = require('express-rate-limit');
+
+var limiter = new RateLimit({
+  windowMs: 15*60*1000, // 15 minutes 
+  max: 100, // limit each IP to 100 requests per windowMs 
+  delayMs: 0 // disable delaying - full speed until the max limit is reached 
+});
+
+app.use(limiter);
+
 // configs come from standard PostgreSQL env vars
 // https://www.postgresql.org/docs/9.6/static/libpq-envars.html
 const pool = new pg.Pool({
